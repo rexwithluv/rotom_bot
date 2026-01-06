@@ -1,20 +1,27 @@
-from telegram.ext import ApplicationBuilder, CommandHandler
+from telegram.ext import Application, ApplicationBuilder, CommandHandler
 
+from src.commands import get_chat_id, get_mediamarkt, get_medico
 from src.configuration import Configuration
-from src.commands import get_chat_id, get_medico
-from src.jobs import medico_job
+from src.jobs import iphone_job, medico_job
 
 config = Configuration("config.toml")
 
 
+async def post_init(application: Application) -> None:
+    msg: str = "¡Hola! Ya estoy online :)"
+    await application.bot.send_message(chat_id=config.chat_id, text=msg)
+    print(msg)
+
+
 if __name__ == "__main__":
-    app = ApplicationBuilder().token(config.bot_token).build()
+    app = ApplicationBuilder().token(config.bot_token).post_init(post_init).build()
 
     app.add_handler(CommandHandler("chat_id", get_chat_id))
     app.add_handler(CommandHandler("medico", get_medico))
+    app.add_handler(CommandHandler("phone", get_mediamarkt))
 
     job_queue = app.job_queue
-    job_queue.run_repeating(medico_job, interval=30, first=3, chat_id=config.chat_id)
+    job_queue.run_repeating(medico_job, interval=30, first=5, chat_id=config.chat_id)
+    job_queue.run_repeating(iphone_job, interval=30, first=5, chat_id=config.chat_id)
 
-    print("Bot encendido <3")
     app.run_polling()

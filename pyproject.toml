@@ -8,5 +8,18 @@ dependencies = [
     "beautifulsoup4>=4.14.3",
     "httpx>=0.28.1",
     "lxml>=6.0.2",
+    "playwright>=1.57.0",
     "python-telegram-bot[job-queue]>=22.5",
 ]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

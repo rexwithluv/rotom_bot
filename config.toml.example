@@ -1,2 +1,3 @@
 bot_token = "CHANGEME"
 chat_id = "CHANGEME"
+job_interval = 300

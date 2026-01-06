@@ -14,6 +14,9 @@ async def post_init(application: Application) -> None:
 
 
 if __name__ == "__main__":
+    bot_token: str = config.bot_token
+    job_interval: int = config.job_interval
+
     app = ApplicationBuilder().token(config.bot_token).post_init(post_init).build()
 
     app.add_handler(CommandHandler("chat_id", get_chat_id))
@@ -21,7 +24,7 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("phone", get_mediamarkt))
 
     job_queue = app.job_queue
-    job_queue.run_repeating(medico_job, interval=30, first=5, chat_id=config.chat_id)
-    job_queue.run_repeating(iphone_job, interval=30, first=5, chat_id=config.chat_id)
+    job_queue.run_repeating(medico_job, interval=job_interval, chat_id=config.chat_id)
+    job_queue.run_repeating(iphone_job, interval=job_interval, chat_id=config.chat_id)
 
     app.run_polling()

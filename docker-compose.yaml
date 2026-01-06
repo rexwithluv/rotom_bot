@@ -1,0 +1,5 @@
+services:
+  rotom-bot:
+    container_name: "rotom-bot"
+    build: .
+    restart: "unless-stopped"

@@ -15,11 +15,11 @@ async def get_iphone_stock() -> str:
         page = await context.new_page()
 
         try:
-            await page.goto(url, timeout=30000)
+            await page.goto(url, timeout=120000)
 
             selector = 'span[class="sc-94eb08bc-0 AKpzk"]'
 
-            await page.wait_for_selector(selector, timeout=10000)
+            await page.wait_for_selector(selector, timeout=60000)
 
             text_count = await page.inner_text(selector)
 

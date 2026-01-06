@@ -19,3 +19,7 @@ class Configuration:
     @property
     def chat_id(self) -> str:
         return self._data["chat_id"]
+
+    @property
+    def job_interval(self) -> float:
+        return float(self._data["job_interval"])

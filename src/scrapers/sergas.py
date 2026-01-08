@@ -34,4 +34,4 @@ async def check_cupo_medico_sergas() -> str:
 
         return f"Estado del cupo de {nombre}: {cupo}"
     except Exception as e:
-        return f"Error: {e}"
+        return f"Error tratando de obtener el cupo: {e}"

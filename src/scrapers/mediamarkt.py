@@ -28,4 +28,4 @@ async def get_iphone_stock() -> str:
 
         except Exception as e:
             await browser.close()
-            return f"Error: {e}"
+            return f"Error obteniendo los datos de mediamarkt: {str(e)}"
